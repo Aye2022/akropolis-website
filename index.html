@@ -331,11 +331,9 @@ document.addEventListener('keydown', e => {
   </div>
   <div class="hero-right">
     <div class="hero-media-slot">
-      <div class="media-placeholder" id="hero-media">
-        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,.5)" stroke-width="1.2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-        <strong>Add your video or photo</strong>
-        <p>See the instructions in the HTML comment inside .hero-right</p>
-      </div>
+      <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;opacity:.88">
+  <source src="MP4logo.mp4" type="video/mp4">
+</video>
     </div>
     <div class="hero-badge">
       <div>Serving Toronto</div>
