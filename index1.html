@@ -32,18 +32,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:14px 5%;display:flex
 @media(max-width:768px){.nav-links{display:none}}
 
 /* ── HERO ─────────────────────────────────────────────────── */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:56px;overflow:hidden}
-@media(max-width:768px){.hero{grid-template-columns:1fr;grid-template-rows:auto 260px}}
-
-.hero-left{background:var(--green);display:flex;flex-direction:column;justify-content:center;padding:60px 6% 60px 5%;position:relative;z-index:2}
-.hero-left::after{content:'';position:absolute;right:-36px;top:0;bottom:0;width:72px;background:var(--green);transform:skewX(-4deg);z-index:3}
-@media(max-width:768px){.hero-left::after{display:none};.hero-left{padding:40px 5%}}
-
+.hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center}
+.hero-slides{position:absolute;inset:0;z-index:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background-size:cover;background-position:center}
+.hero-slide.active{opacity:1}
+.hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,30,20,.82) 0%,rgba(10,30,20,.5) 50%,rgba(10,30,20,.25) 100%)}
+.hero-left{position:relative;z-index:2;padding:140px 5% 80px}
+.hero-left::after{display:none}
 .hero-tag{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;border-radius:2px;margin-bottom:22px;width:fit-content}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(30px,4.2vw,56px);font-weight:400;color:var(--white);line-height:1.1;margin-bottom:16px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5.5vw,72px);font-weight:400;color:var(--white);line-height:1.05;margin-bottom:18px}
 .hero h1 em{color:var(--gold);font-style:normal;display:block}
-.hero-desc{font-size:15px;color:rgba(255,255,255,.68);line-height:1.75;max-width:400px;margin-bottom:32px}
-.hero-ctas{display:flex;gap:10px;flex-wrap:wrap}
+.hero-desc{font-size:16px;color:rgba(255,255,255,.75);line-height:1.75;max-width:480px;margin-bottom:36px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero-dots{position:absolute;bottom:32px;left:5%;z-index:10;display:flex;gap:8px}
+.hero-dot{width:28px;height:3px;background:rgba(255,255,255,.35);border-radius:2px;cursor:pointer;transition:all .3s}
+.hero-dot.active{background:var(--gold);width:44px}
+.hero-counter{position:absolute;bottom:32px;right:5%;z-index:10;font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.1em}
+@media(max-width:768px){.hero-left{padding:120px 5% 100px}}
 
 /* WhatsApp CTA */
 .btn-wa{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-size:13px;font-weight:500;padding:13px 22px;border-radius:3px;text-decoration:none;transition:all .2s}
@@ -54,24 +59,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:14px 5%;display:flex
 .btn-outline{border:1px solid rgba(255,255,255,.35);color:var(--white);font-size:13px;padding:13px 22px;border-radius:3px;text-decoration:none;transition:all .2s}
 .btn-outline:hover{border-color:rgba(255,255,255,.8)}
 
-.hero-stats{display:flex;gap:28px;margin-top:44px;padding-top:32px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap}
-.stat-num{font-family:'Playfair Display',serif;font-size:30px;color:var(--gold);line-height:1}
-.stat-lbl{font-size:10px;color:rgba(255,255,255,.5);margin-top:3px;letter-spacing:.05em;text-transform:uppercase}
-
-/* Hero right — video/photo slot */
-.hero-right{position:relative;overflow:hidden;background:#0f2a1e}
-.hero-media-slot{position:absolute;inset:0}
-.hero-media-slot video,.hero-media-slot img{width:100%;height:100%;object-fit:cover;opacity:.88}
-
-/* Placeholder shown when no media uploaded */
-.media-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(135deg,#0f2a1e,#2D6A4F);border:2px dashed rgba(201,168,76,.2);padding:24px;text-align:center}
-.media-placeholder svg{opacity:.35}
-.media-placeholder p{color:rgba(255,255,255,.35);font-size:13px;line-height:1.5;max-width:200px}
-.media-placeholder strong{color:rgba(201,168,76,.5);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
-
-.hero-badge{position:absolute;bottom:20px;left:20px;background:rgba(27,67,50,.92);backdrop-filter:blur(8px);border:1px solid rgba(201,168,76,.3);padding:10px 14px;border-radius:3px;z-index:10}
-.hero-badge div{font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase}
-.hero-badge strong{font-size:13px;color:var(--gold-light);display:block;margin-top:2px}
+.hero-stats{display:flex;gap:36px;margin-top:44px;padding-top:32px;border-top:1px solid rgba(255,255,255,.15);flex-wrap:wrap}
+.stat-num{font-family:'Playfair Display',serif;font-size:34px;color:var(--gold);line-height:1}
+.stat-lbl{font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;letter-spacing:.05em;text-transform:uppercase}
 
 /* ── SECTIONS BASE ────────────────────────────────────────── */
 .section-tag{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--green-light);margin-bottom:10px}
@@ -261,7 +251,7 @@ document.addEventListener('keydown', e => {
 
 <!-- Coming Soon Screen -->
 <div id="coming-soon">
-  <img src="AKRopolis_Logo_transparent.png" alt="Akropolis Construction Inc" style="height:80px;width:auto;object-fit:contain;margin-bottom:8px">
+  <div class="cs-logo">Akropolis <span>Construction</span> Inc</div>
   <div class="cs-tag">Toronto & Greater Toronto Area</div>
   <div class="cs-title">We're getting ready.</div>
   <div class="cs-sub">Our new website is coming soon. In the meantime, call us at (437) 217-5448 for a free estimate.</div>
@@ -283,7 +273,7 @@ document.addEventListener('keydown', e => {
   NAVIGATION
 ============================================================ -->
 <nav>
-  <a href="#home" style="display:flex;align-items:center;text-decoration:none"><img src="AKRopolis_Logo_transparent.png" alt="Akropolis Construction Inc" style="height:48px;width:auto;object-fit:contain"></a>
+  <a href="#home" style="display:flex;align-items:center;text-decoration:none"><img src="logo.png" alt="Akropolis Construction Inc" style="height:48px;width:auto;object-fit:contain"></a>
   <div class="nav-links">
     <a href="#services">Services</a>
     <a href="#about">About</a>
@@ -308,6 +298,13 @@ document.addEventListener('keydown', e => {
     <img src="your-photo.jpg" alt="Akropolis team">
 ============================================================ -->
 <section class="hero" id="home">
+  <div class="hero-slides" id="hero-slides">
+    <div class="hero-slide active" style="background-image:url('foto1.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('foto2.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('foto3.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('foto4.jpeg')"></div>
+  </div>
+
   <div class="hero-left">
     <div class="hero-tag">Toronto & Greater Toronto Area</div>
     <h1>Your Home,<br><em>Our Craft.</em></h1>
@@ -324,24 +321,20 @@ document.addEventListener('keydown', e => {
       <a href="#services" class="btn-outline">Our Services</a>
     </div>
     <div class="hero-stats">
-      <div><div class="stat-num">500+</div><div class="stat-lbl">Projects done</div></div>
+      <div><div class="stat-num">600+</div><div class="stat-lbl">Projects done</div></div>
       <div><div class="stat-num">100%</div><div class="stat-lbl">Insured</div></div>
       <div><div class="stat-num">GTA</div><div class="stat-lbl">Wide service</div></div>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-media-slot">
-      <div class="media-placeholder" id="hero-media">
-        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,.5)" stroke-width="1.2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-        <strong>Add your video or photo</strong>
-        <p>See the instructions in the HTML comment inside .hero-right</p>
-      </div>
-    </div>
-    <div class="hero-badge">
-      <div>Serving Toronto</div>
-      <strong>& Greater Toronto Area</strong>
-    </div>
+
+  <div class="hero-dots" id="hero-dots">
+    <div class="hero-dot active" onclick="goSlide(0)"></div>
+    <div class="hero-dot" onclick="goSlide(1)"></div>
+    <div class="hero-dot" onclick="goSlide(2)"></div>
+    <div class="hero-dot" onclick="goSlide(3)"></div>
   </div>
+  <div class="hero-counter"><span id="slide-cur">1</span> / 4</div>
+
 </section>
 
 <!-- ============================================================
@@ -581,7 +574,7 @@ document.addEventListener('keydown', e => {
 </section>
 
 <footer>
-  <a href="#home" style="display:flex;align-items:center;text-decoration:none"><img src="AKRopolis_Logo_transparent.png" alt="Akropolis Construction Inc" style="height:40px;width:auto;object-fit:contain"></a>
+  <a href="#home" style="display:flex;align-items:center;text-decoration:none"><img src="logo.png" alt="Akropolis Construction Inc" style="height:38px;width:auto;object-fit:contain"></a>
   <div class="footer-text">© 2025 Akropolis Construction Inc · Toronto, Ontario · General Contractor · Landscaping · Renovations · Painting</div>
   <div class="footer-phone">(437) 217-5448</div>
 </footer>
