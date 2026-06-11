@@ -541,6 +541,49 @@ function openLightbox(src,alt){
 }
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+// CONTACT FORM
+async function submitForm(e){
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  const status = document.getElementById('form-status');
+  const data = {
+    name: document.getElementById('f-name').value,
+    phone: document.getElementById('f-phone').value,
+    email: document.getElementById('f-email').value,
+    service: document.getElementById('f-service').value,
+    message: document.getElementById('f-message').value
+  };
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  status.textContent = '';
+  try {
+    const res = await fetch('https://formspree.io/f/mjgdeqld', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(data)
+    });
+    if(res.ok){
+      status.style.color = '#1B4332';
+      status.textContent = '✓ Message sent! We will contact you within 24 hours.';
+      e.target.reset();
+    } else { throw new Error(); }
+  } catch {
+    const s = encodeURIComponent('Website inquiry — '+(data.service||'General'));
+    const b = encodeURIComponent('Name: '+data.name+'
+Phone: '+(data.phone||'N/A')+'
+Email: '+data.email+'
+Service: '+(data.service||'N/A')+'
+
+Message:
+'+data.message);
+    window.location.href = 'mailto:info@akropolisconstructions.com?subject='+s+'&body='+b;
+    status.style.color = '#1B4332';
+    status.textContent = '✓ Opening your email app...';
+  }
+  btn.textContent = 'Send Message →';
+  btn.disabled = false;
+}
 </script>
 </body>
 </html>
