@@ -288,7 +288,7 @@ document.addEventListener('keydown',e=>{
   <div style="padding:0 5%">
     <div class="services-grid">
       <div class="svc-card" onclick="showGallery('landscaping',this)"><div class="svc-num">01</div><div class="svc-title">Landscaping & Lawn Care</div><div class="svc-text">Seasonal cleanups, sod installation, garden maintenance, and full yard restoration.</div><div class="svc-arrow">→</div></div>
-      <div class="svc-card" onclick="showGallery('renovations',this)"><div class="svc-num">02</div><div class="svc-title">Home Maintenance</div><div class="svc-text">Interior and exterior renovation work including flooring, drywall, trim, and finishing.</div><div class="svc-arrow">→</div></div>
+      <div class="svc-card" onclick="showGallery('renovations',this)"><div class="svc-num">02</div><div class="svc-title">Home Renovations</div><div class="svc-text">Interior and exterior renovation work including flooring, drywall, trim, and finishing.</div><div class="svc-arrow">→</div></div>
       <div class="svc-card" onclick="showGallery('painting',this)"><div class="svc-num">03</div><div class="svc-title">Interior & Exterior Painting</div><div class="svc-text">Professional painting for rooms, walls, ceilings, fences, and decks.</div><div class="svc-arrow">→</div></div>
       <div class="svc-card" onclick="showGallery('maintenance',this)"><div class="svc-num">04</div><div class="svc-title">Property Maintenance</div><div class="svc-text">Regular and seasonal upkeep to keep your property in top condition year-round.</div><div class="svc-arrow">→</div></div>
       <div class="svc-card" onclick="showGallery('handyman',this)"><div class="svc-num">05</div><div class="svc-title">Handyman Services</div><div class="svc-text">Repairs, installations, and general home maintenance. One call for all your needs.</div><div class="svc-arrow">→</div></div>
@@ -541,6 +541,49 @@ function openLightbox(src,alt){
 }
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+// CONTACT FORM
+async function submitForm(e){
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  const status = document.getElementById('form-status');
+  const data = {
+    name: document.getElementById('f-name').value,
+    phone: document.getElementById('f-phone').value,
+    email: document.getElementById('f-email').value,
+    service: document.getElementById('f-service').value,
+    message: document.getElementById('f-message').value
+  };
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  status.textContent = '';
+  try {
+    const res = await fetch('https://formspree.io/f/mjgdeqld', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(data)
+    });
+    if(res.ok){
+      status.style.color = '#1B4332';
+      status.textContent = '✓ Message sent! We will contact you within 24 hours.';
+      e.target.reset();
+    } else { throw new Error(); }
+  } catch {
+    const s = encodeURIComponent('Website inquiry — '+(data.service||'General'));
+    const b = encodeURIComponent('Name: '+data.name+'
+Phone: '+(data.phone||'N/A')+'
+Email: '+data.email+'
+Service: '+(data.service||'N/A')+'
+
+Message:
+'+data.message);
+    window.location.href = 'mailto:info@akropolisconstructions.com?subject='+s+'&body='+b;
+    status.style.color = '#1B4332';
+    status.textContent = '✓ Opening your email app...';
+  }
+  btn.textContent = 'Send Message →';
+  btn.disabled = false;
+}
 </script>
 </body>
 </html>
