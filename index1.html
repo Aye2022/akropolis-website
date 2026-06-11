@@ -81,11 +81,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:12px 5%;display:flex
 .gallery-item:hover img{transform:scale(1.04)}
 .gallery-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,var(--warm),#e0d8cc)}
 .gallery-ph span{font-size:11px;color:var(--muted);text-align:center;padding:0 8px}
-.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:1000;align-items:center;justify-content:center;padding:16px}
 .lightbox.open{display:flex}
-.lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:4px}
-.lightbox-close{position:absolute;top:16px;right:20px;font-size:28px;color:rgba(255,255,255,.7);cursor:pointer}
-.lightbox-close:hover{color:#fff}
+.lightbox img{max-width:95vw;max-height:92vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.8);transition:transform .3s}
+.lightbox-close{position:absolute;top:14px;right:18px;font-size:32px;color:rgba(255,255,255,.8);cursor:pointer;line-height:1;z-index:10;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);border-radius:50%}
+.lightbox-close:hover{color:#fff;background:rgba(255,255,255,.2)}
+.lightbox-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:13px;letter-spacing:.05em}
 
 /* ABOUT */
 #about{background:var(--warm);padding:80px 5%}
@@ -306,10 +307,12 @@ document.addEventListener('keydown',e=>{
 <!-- ABOUT -->
 <section id="about">
   <div class="about-inner" style="padding:80px 5%">
-    <div class="about-visual">
-      <div class="about-visual-bg"></div>
-      <div class="about-visual-text">Akropolis<br>Construction<br>Inc</div>
-      <div class="about-badge">Fully Insured</div>
+    <div class="about-visual" style="overflow:hidden;border-radius:4px;aspect-ratio:4/3;position:relative">
+      <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+        <source src="MP4logo.mp4" type="video/mp4">
+      </video>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.25)"></div>
+      <div class="about-badge" style="position:absolute;bottom:16px;right:16px;z-index:2">Fully Insured</div>
     </div>
     <div>
       <div class="section-tag">About us</div>
@@ -333,11 +336,11 @@ document.addEventListener('keydown',e=>{
     <div class="section-title">Our Partners & Certifications</div>
     <p class="partners-sub">We work with leading platforms and brands — verified, rated, and trusted.</p>
     <div class="partners-grid">
-      <div class="partner-card">
+      <a class="partner-card" href="https://jiffyondemand.com/pro/luis-enrique-martinez-de-jesus" target="_blank" style="text-decoration:none;cursor:pointer">
         <div class="partner-logo-ph"><span>JIFFY</span></div>
         <span class="partner-badge-tag">✓ Pro Contractor</span>
-        <span class="partner-name">Jiffy</span>
-      </div>
+        <span class="partner-name">View our Jiffy profile ↗</span>
+      </a>
       <div class="partner-card">
         <div class="partner-logo-ph"><span>PARTNER</span></div>
         <span class="partner-badge-tag">✓ Certified</span>
@@ -387,8 +390,10 @@ document.addEventListener('keydown',e=>{
     <div>
       <div class="section-tag">Get in touch</div>
       <div class="section-title">Ready to get started?</div>
-      <div class="section-sub">Call, text, or WhatsApp us for a free estimate. We respond within 24 hours.</div>
-      <div class="contact-info">
+      <div class="section-sub">Call us, WhatsApp us, or fill out the form — we respond within 24 hours.</div>
+
+      <!-- Contact info -->
+      <div class="contact-info" style="margin-top:20px">
         <div class="contact-item">
           <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>
           <div>
@@ -401,13 +406,51 @@ document.addEventListener('keydown',e=>{
           </div>
         </div>
         <div class="contact-item">
-          <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div><div class="c-label">Email</div><div class="c-val"><a href="mailto:info@akropolisconstructions.com">info@akropolisconstructions.com</a></div></div>
-        </div>
-        <div class="contact-item">
           <div class="c-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-          <div><div class="c-label">Instagram</div><div class="c-val"><a href="https://instagram.com/akropolisrenovation" target="_blank">@akropolisrenovation</a></div></div>
+          <div><div class="c-label">Instagram</div><div class="c-val"><a href="https://www.instagram.com/akropolisconstruction?igsh=MWF2eGJ1dDI4Y3pvNQ%3D%3D&utm_source=qr" target="_blank">@akropolisconstruction ↗</a></div></div>
         </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div style="margin-top:28px">
+        <div style="font-size:13px;font-weight:500;color:var(--green);margin-bottom:14px;text-transform:uppercase;letter-spacing:.08em">Send us a message</div>
+        <form id="contact-form" style="display:flex;flex-direction:column;gap:12px" onsubmit="submitForm(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div>
+              <label style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:5px">Your Name *</label>
+              <input type="text" id="f-name" required placeholder="John Smith" style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:4px;font-size:14px;font-family:inherit;transition:border .2s;outline:none" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='#ddd'">
+            </div>
+            <div>
+              <label style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:5px">Phone Number</label>
+              <input type="tel" id="f-phone" placeholder="(416) 000-0000" style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:4px;font-size:14px;font-family:inherit;transition:border .2s;outline:none" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='#ddd'">
+            </div>
+          </div>
+          <div>
+            <label style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:5px">Email Address *</label>
+            <input type="email" id="f-email" required placeholder="your@email.com" style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:4px;font-size:14px;font-family:inherit;transition:border .2s;outline:none" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='#ddd'">
+          </div>
+          <div>
+            <label style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:5px">Service Requested</label>
+            <select id="f-service" style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:4px;font-size:14px;font-family:inherit;background:#fff;outline:none;color:#444">
+              <option value="">Select a service...</option>
+              <option>Landscaping & Lawn Care</option>
+              <option>Home Renovations</option>
+              <option>Interior & Exterior Painting</option>
+              <option>Property Maintenance</option>
+              <option>Handyman Services</option>
+              <option>Junk Removal & Demolition</option>
+              <option>Other / Not sure</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:5px">Message *</label>
+            <textarea id="f-message" required rows="4" placeholder="Tell us about your project — location, size, timeline..." style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:4px;font-size:14px;font-family:inherit;resize:vertical;transition:border .2s;outline:none" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='#ddd'"></textarea>
+          </div>
+          <button type="submit" style="background:var(--green);color:#fff;border:none;padding:13px 24px;border-radius:4px;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;font-family:inherit" onmouseover="this.style.background='var(--green-mid)'" onmouseout="this.style.background='var(--green)'">
+            Send Message →
+          </button>
+          <div id="form-status" style="font-size:13px;text-align:center;min-height:20px"></div>
+        </form>
       </div>
     </div>
     <div>
@@ -436,7 +479,7 @@ document.addEventListener('keydown',e=>{
 
 <footer>
   <a href="#home"><img src="logo.png" alt="Akropolis Construction Inc" style="height:38px;width:auto;object-fit:contain"></a>
-  <div class="footer-text">© 2025 Akropolis Construction Inc · Toronto, Ontario · General Contractor · Landscaping · Renovations</div>
+  <div class="footer-text">© 2026 Akropolis Construction Inc · Toronto, Ontario · General Contractor · Landscaping · Renovations</div>
   <div class="footer-phone">(437) 217-5448</div>
 </footer>
 
